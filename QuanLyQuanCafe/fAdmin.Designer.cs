@@ -784,6 +784,7 @@
             this.txbFoodID.ReadOnly = true;
             this.txbFoodID.Size = new System.Drawing.Size(186, 20);
             this.txbFoodID.TabIndex = 1;
+            this.txbFoodID.TextChanged += new System.EventHandler(this.txbFoodID_TextChanged);
             // 
             // label2
             // 
