@@ -59,10 +59,10 @@ namespace QuanLyQuanCafe
 
         void AddFoodBinding()
         {
-            txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Name"));
+            txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Name",true,DataSourceUpdateMode.Never));
             //thay đổi thuộc tính text theo name trong dataSource
-            txbFoodID.DataBindings.Add(new Binding("text", dtgvFood.DataSource, "ID"));
-            nmFoodPrice.DataBindings.Add(new Binding("value", dtgvFood.DataSource, "price"));
+            txbFoodID.DataBindings.Add(new Binding("text", dtgvFood.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            nmFoodPrice.DataBindings.Add(new Binding("value", dtgvFood.DataSource, "price",true,DataSourceUpdateMode.Never));
 
         }
 
@@ -83,10 +83,6 @@ namespace QuanLyQuanCafe
             LoadListFood();
         }
 
-
-
-        #endregion
-
         private void txbFoodID_TextChanged(object sender, EventArgs e)
         {
             if (dtgvFood.SelectedCells.Count > 0)
@@ -100,7 +96,7 @@ namespace QuanLyQuanCafe
                 int index = -1;
                 int i = 0;
 
-                foreach(Category item in cmbFoodCategory.Items)
+                foreach (Category item in cmbFoodCategory.Items)
                 {
                     if (item.ID == category.ID)
                     {
@@ -114,5 +110,88 @@ namespace QuanLyQuanCafe
             }
 
         }
+
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            string name = txbFoodName.Text;
+            int categoryId = (cmbFoodCategory.SelectedItem as Category).ID;
+            float price = (float)nmFoodPrice.Value;
+
+            if (FoodDAO.Instance.InsertFood(name, categoryId, price))
+            {
+                MessageBox.Show("Thêm thành công!");
+                LoadListFood();
+                if (insertFood != null)
+                    insertFood(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi thêm!");
+            }
+        }
+
+        private void btnEditFood_Click(object sender, EventArgs e)
+        {
+            string name = txbFoodName.Text;
+            int categoryId = (cmbFoodCategory.SelectedItem as Category).ID;
+            float price = (float)nmFoodPrice.Value;
+            int idFood = Convert.ToInt32(txbFoodID.Text);
+            if (FoodDAO.Instance.UpdateFood(idFood, name, categoryId, price))
+            {
+                MessageBox.Show("Sửa thành công!");
+                LoadListFood();
+                if (updateFood != null)
+                    updateFood(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi sửa!");
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+            int idFood = Convert.ToInt32(txbFoodID.Text);
+
+            BillInfoDAO.Instance.DeleteBillInfoByFoodId(idFood);
+
+            if (FoodDAO.Instance.DeleteFood(idFood))
+            {
+                MessageBox.Show("Xóa thành công!");
+                LoadListFood();
+                if (deleteFood != null)
+                    deleteFood(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi xóa!");
+            }
+        }
+
+        private event EventHandler insertFood;
+        public event EventHandler InsertFood
+        {
+            add { insertFood += value; }
+            remove { insertFood -= value; }
+        }
+
+        private event EventHandler deleteFood;
+        public event EventHandler DeleteFood
+        {
+            add { deleteFood += value; }
+            remove { deleteFood -= value; }
+        }
+
+        private event EventHandler updateFood;
+        public event EventHandler UpdateFood
+        {
+            add { updateFood += value; }
+            remove { updateFood -= value; }
+        }
+        #endregion
+
+
+
     }
 }
