@@ -43,5 +43,35 @@ namespace QuanLyQuanCafe.DAO
             }
             return tableList;
         }
+
+        public List<TableStatus> GetListTableStatus()
+        {
+            List<TableStatus> listTableStatus = new List<TableStatus>();
+           
+             TableStatus status = new TableStatus("Trống");
+             listTableStatus.Add(status);
+             TableStatus status1 = new TableStatus("Có người");
+             listTableStatus.Add(status1);
+
+            return listTableStatus;
+        }
+
+        public TableStatus GetStatusById(int iD)
+        {
+            TableStatus status = null;
+
+            string query = "SELECT tf.[STATUS] FROM TableFood tf WHERE tf.id =  " + iD;
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                status = new TableStatus(item);
+                return status;
+            }
+
+            return status;
+        }
     }
 }
+

@@ -49,6 +49,7 @@
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
             this.tcTable = new System.Windows.Forms.TabPage();
             this.panel26 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel29 = new System.Windows.Forms.Panel();
             this.cmbStatusTable = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -112,6 +113,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.tcAdmin = new System.Windows.Forms.TabControl();
+            this.label14 = new System.Windows.Forms.Label();
             this.tcAccount.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -343,6 +345,7 @@
             // 
             // panel26
             // 
+            this.panel26.Controls.Add(this.label8);
             this.panel26.Controls.Add(this.panel29);
             this.panel26.Controls.Add(this.panel27);
             this.panel26.Controls.Add(this.panel28);
@@ -350,6 +353,15 @@
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(317, 356);
             this.panel26.TabIndex = 6;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(73, 242);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "label8";
             // 
             // panel29
             // 
@@ -367,7 +379,6 @@
             this.cmbStatusTable.Name = "cmbStatusTable";
             this.cmbStatusTable.Size = new System.Drawing.Size(162, 21);
             this.cmbStatusTable.TabIndex = 1;
-            this.cmbStatusTable.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label13
             // 
@@ -421,6 +432,7 @@
             this.txbTableID.ReadOnly = true;
             this.txbTableID.Size = new System.Drawing.Size(163, 20);
             this.txbTableID.TabIndex = 1;
+            this.txbTableID.TextChanged += new System.EventHandler(this.txbTableID_TextChanged);
             // 
             // label10
             // 
@@ -451,6 +463,7 @@
             this.btnShowTable.TabIndex = 3;
             this.btnShowTable.Text = "Xem";
             this.btnShowTable.UseVisualStyleBackColor = true;
+            this.btnShowTable.Click += new System.EventHandler(this.btnShowTable_Click);
             // 
             // btnEditTable
             // 
@@ -590,6 +603,7 @@
             this.btnShowCategory.TabIndex = 3;
             this.btnShowCategory.Text = "Xem";
             this.btnShowCategory.UseVisualStyleBackColor = true;
+            this.btnShowCategory.Click += new System.EventHandler(this.btnShowCategory_Click);
             // 
             // btnEditCategory
             // 
@@ -628,6 +642,7 @@
             // 
             // dtgvCategory
             // 
+            this.dtgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvCategory.Location = new System.Drawing.Point(2, 3);
             this.dtgvCategory.Name = "dtgvCategory";
@@ -672,9 +687,11 @@
             this.btnSearchFood.TabIndex = 4;
             this.btnSearchFood.Text = "Tìm kiếm";
             this.btnSearchFood.UseVisualStyleBackColor = true;
+            this.btnSearchFood.Click += new System.EventHandler(this.btnSearchFood_Click);
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.label14);
             this.panel6.Controls.Add(this.panel10);
             this.panel6.Controls.Add(this.panel9);
             this.panel6.Controls.Add(this.panel8);
@@ -857,6 +874,7 @@
             // 
             // dtgvFood
             // 
+            this.dtgvFood.AllowUserToResizeRows = false;
             this.dtgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvFood.Location = new System.Drawing.Point(3, 3);
             this.dtgvFood.Name = "dtgvFood";
@@ -939,6 +957,15 @@
             this.tcAdmin.Size = new System.Drawing.Size(662, 463);
             this.tcAdmin.TabIndex = 0;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(94, 302);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "label14";
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -948,7 +975,6 @@
             this.Name = "fAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
-            this.PaddingChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             this.tcAccount.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
@@ -962,6 +988,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).EndInit();
             this.tcTable.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
+            this.panel26.PerformLayout();
             this.panel29.ResumeLayout(false);
             this.panel29.PerformLayout();
             this.panel27.ResumeLayout(false);
@@ -984,6 +1011,7 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodPrice)).EndInit();
@@ -1090,5 +1118,7 @@
         private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.DataGridView dtgvAccount;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label14;
     }
 }

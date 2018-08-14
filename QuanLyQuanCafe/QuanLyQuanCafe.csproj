@@ -56,6 +56,7 @@
     <Compile Include="DAO\FoodDAO.cs" />
     <Compile Include="DAO\FoodMenuDAO.cs" />
     <Compile Include="DAO\TableDAO.cs" />
+    <Compile Include="DAO\TableStatusDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillInfo.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="DTO\Food.cs" />
     <Compile Include="DTO\FoodMenu.cs" />
     <Compile Include="DTO\Table.cs" />
+    <Compile Include="DTO\TableStatus.cs" />
     <Compile Include="fAccountProfile.cs">
       <SubType>Form</SubType>
     </Compile>

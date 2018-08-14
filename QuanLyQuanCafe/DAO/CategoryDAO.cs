@@ -41,7 +41,7 @@ namespace QuanLyQuanCafe.DAO
         {
             Category category = null;
 
-            string query = "SELECT* FROM FoodCategory  where id = " + iD;
+            string query = "SELECT * FROM FoodCategory  where id = " + iD;
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 

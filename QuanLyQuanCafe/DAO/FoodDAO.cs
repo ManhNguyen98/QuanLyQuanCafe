@@ -25,7 +25,7 @@ namespace QuanLyQuanCafe.DAO
         {
             List<Food> list = new List<Food>();
 
-            string query = "SELECT * FROM Food f WHERE f.idCategory = " +id;
+            string query = "SELECT * FROM Food f WHERE f.idCategory = " + id;
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -42,7 +42,7 @@ namespace QuanLyQuanCafe.DAO
         {
             List<Food> list = new List<Food>();
 
-            string query = "SELECT * FROM Food ";
+            string query = "SELECT * FROM Food";
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -65,7 +65,7 @@ namespace QuanLyQuanCafe.DAO
 
         public bool UpdateFood(int idFood, string name, int id, float price)
         {
-            string query = string.Format("UPDATE Food SET NAME = N'{0}',	idCategory = {1},	price = {2} WHERE id = {3}", name, id, price,idFood);
+            string query = string.Format("UPDATE Food SET NAME = N'{0}',	idCategory = {1},	price = {2} WHERE id = {3}", name, id, price, idFood);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;
@@ -78,5 +78,23 @@ namespace QuanLyQuanCafe.DAO
 
             return result > 0;
         }
+
+        public List<Food> SearchFoodByName(string name)
+        {
+            List<Food> list = new List<Food>();
+
+            string query = string.Format("SELECT * FROM Food where name  like N'%{0}%'", name);
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                Food food = new Food(item);
+                list.Add(food);
+            }
+
+            return list;
+        }
+
     }
 }

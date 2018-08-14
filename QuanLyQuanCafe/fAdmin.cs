@@ -1,6 +1,7 @@
 ﻿using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
@@ -8,6 +9,8 @@ namespace QuanLyQuanCafe
     public partial class fAdmin : Form
     {
         BindingSource foodlist = new BindingSource();
+        BindingSource tablelist = new BindingSource();
+        BindingSource categorylist = new BindingSource();
         public fAdmin()
         {
             InitializeComponent();
@@ -25,20 +28,28 @@ namespace QuanLyQuanCafe
 
         //   dtgvAccount.DataSource =DataProvider.Instance.ExecuteQuery(query,new object[] { "NhungIrene"});
         //}
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         #region methods
         void Load()
         {
             dtgvFood.DataSource = foodlist;
+            dtgvTable.DataSource = tablelist;
+            dtgvCategory.DataSource = categorylist;
+
             LoadDateTimePicker();
             LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
+
             LoadListFood();
             LoadCategoryIntoCombobox(cmbFoodCategory);
             AddFoodBinding();
+
+            LoadTableFood();
+            AddTableBinding();
+            LoadStatuIntoCombobox(cmbStatusTable);
+
+            LoadCategory();
+            AddCategoryBinding();
         }
 
         void LoadDateTimePicker()
@@ -71,6 +82,42 @@ namespace QuanLyQuanCafe
             cb.DataSource = CategoryDAO.Instance.GetListCateGory();
             cb.DisplayMember = "name";
         }
+
+        List<Food> SearchFoodByName(String name)
+        {
+            List<Food> listfood = FoodDAO.Instance.SearchFoodByName(name);
+
+            return listfood;
+        }
+
+        void LoadTableFood()
+        {
+            tablelist.DataSource = TableDAO.Instance.LoadTableList();
+        }
+
+        void AddTableBinding()
+        {
+            txbTable.DataBindings.Add(new Binding("text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbTableID.DataBindings.Add(new Binding("text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            //cmbStatusTable.DataBindings.Add(new Binding("member", dtgvTable.DataSource, "Status"));
+        }
+
+        void LoadStatuIntoCombobox(ComboBox cb)
+        {
+            cb.DataSource = TableStatusDAO.Instance.GetListTableStatus();
+            cb.DisplayMember = "name";
+        }
+
+        void LoadCategory()
+        {
+            categorylist.DataSource = CategoryDAO.Instance.GetListCateGory();
+        }
+
+        void AddCategoryBinding()
+        {
+            txtCategoryId.DataBindings.Add(new Binding("text", dtgvCategory.DataSource, "id", true, DataSourceUpdateMode.Never));
+            txtCategoryName.DataBindings.Add(new Binding("text", dtgvCategory.DataSource, "name", true, DataSourceUpdateMode.Never));
+        }
         #endregion
         #region events
         private void btnViewBill_Click(object sender, EventArgs e)
@@ -85,29 +132,34 @@ namespace QuanLyQuanCafe
 
         private void txbFoodID_TextChanged(object sender, EventArgs e)
         {
-            if (dtgvFood.SelectedCells.Count > 0)
+            try
             {
-                int id = (int)dtgvFood.SelectedCells[0].OwningRow.Cells["IdCategory"].Value;
-                //lấy 1 ô trong datagridview
-                Category category = CategoryDAO.Instance.GetCategoryById(id);
-
-                cmbFoodCategory.SelectedItem = category;
-
-                int index = -1;
-                int i = 0;
-
-                foreach (Category item in cmbFoodCategory.Items)
+                if (dtgvFood.SelectedCells.Count > 0)
                 {
-                    if (item.ID == category.ID)
-                    {
-                        index = i;
-                        break;
-                    }
-                    i++;
-                }
+                    int id = (int)dtgvFood.SelectedCells[0].OwningRow.Cells["IdCategory"].Value;
+                    //lấy 1 ô trong datagridview
+                    Category category = CategoryDAO.Instance.GetCategoryById(id);
 
-                cmbFoodCategory.SelectedIndex = index;
+                    label14.Text = category.Name;
+                    cmbFoodCategory.SelectedItem = category;
+
+                    int index = -1;
+                    int i = 0;
+
+                    foreach (Category item in cmbFoodCategory.Items)
+                    {
+                        if (item.ID == category.ID)
+                        {
+                            index = i;
+                            break;
+                        }
+                        i++;
+                    }
+
+                    cmbFoodCategory.SelectedIndex = index;
+                }
             }
+            catch { }
 
         }
 
@@ -189,8 +241,54 @@ namespace QuanLyQuanCafe
             add { updateFood += value; }
             remove { updateFood -= value; }
         }
-        #endregion
 
+        private void btnSearchFood_Click(object sender, EventArgs e)
+        {
+            foodlist.DataSource = SearchFoodByName(txbSearchFoodName.Text);
+
+        }
+
+        private void btnShowTable_Click(object sender, EventArgs e)
+        {
+            LoadTableFood();
+        }
+
+        private void txbTableID_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                    int id = (int)dtgvTable.SelectedCells[0].OwningRow.Cells["ID"].Value;
+     
+                    TableStatus status = TableStatusDAO.Instance.GetStatusById(id);
+
+                    label8.Text = status.Name;
+                    cmbStatusTable.SelectedItem = status;
+                    int index = -1;
+                    int i = 0;
+
+                    foreach (TableStatus item in cmbStatusTable.Items)
+                    {
+                       if (Equals(item.Name,status.Name))
+                        {
+                            index = i;
+                            break;
+                        }
+                        i++;
+                    }
+
+
+                cmbStatusTable.SelectedIndex = index;
+                
+            }
+            catch { }
+        }
+
+        private void btnShowCategory_Click(object sender, EventArgs e)
+        {
+            LoadCategory();
+        }
+        #endregion
 
 
     }
