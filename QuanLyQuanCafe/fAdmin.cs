@@ -11,6 +11,7 @@ namespace QuanLyQuanCafe
         BindingSource foodlist = new BindingSource();
         BindingSource tablelist = new BindingSource();
         BindingSource categorylist = new BindingSource();
+        BindingSource accountlist = new BindingSource();
         public fAdmin()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace QuanLyQuanCafe
             dtgvFood.DataSource = foodlist;
             dtgvTable.DataSource = tablelist;
             dtgvCategory.DataSource = categorylist;
+            dtgvAccount.DataSource = accountlist;
 
             LoadDateTimePicker();
             LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
@@ -50,6 +52,10 @@ namespace QuanLyQuanCafe
 
             LoadCategory();
             AddCategoryBinding();
+
+            AddAccountBinding();
+            LoadAccount();
+            LoadTypeIntoCombobox(cmbType);
         }
 
         void LoadDateTimePicker()
@@ -61,6 +67,17 @@ namespace QuanLyQuanCafe
         void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
         {
             dtgvBill.DataSource = BillDAO.Instance1.GetBillListByDate(checkIn, checkOut);
+        }
+
+        void AddAccountBinding()
+        {
+            txbUserName.DataBindings.Add(new Binding("text", dtgvAccount.DataSource, "username", true, DataSourceUpdateMode.Never));
+            txbDisplayName.DataBindings.Add(new Binding("text", dtgvAccount.DataSource, "displayname", true, DataSourceUpdateMode.Never));
+        }
+
+        void LoadAccount()
+        {
+            accountlist.DataSource = AccountDAO.Instance.GetListAccount();
         }
 
         void LoadListFood()
@@ -120,6 +137,48 @@ namespace QuanLyQuanCafe
         }
         #endregion
         #region events
+
+        private void btnShowAccount_Click(object sender, EventArgs e)
+        {
+            LoadAccount();
+        }
+
+        void LoadTypeIntoCombobox(ComboBox cb)
+        {
+            cb.DataSource = AccoutTypeDAO.Instance.GetListAccountType();
+            cb.DisplayMember = "name";
+        }
+
+        private void txbUserName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string name = dtgvAccount.SelectedCells[0].OwningRow.Cells["UserName"].Value.ToString();
+
+                AccountType type = AccoutTypeDAO.Instance.GetTypeByName(name);
+
+
+                cmbType.SelectedItem = type.Name;
+                int index = -1;
+                int i = 0;
+
+                foreach (AccountType item in cmbType.Items)
+                {
+                    if (item.Id == type.Id)
+                    {
+                        index = i;
+                        break;
+                    }
+                    i++;
+                }
+
+
+                cmbType.SelectedIndex = index;
+
+            }
+            catch { }
+        }
         private void btnViewBill_Click(object sender, EventArgs e)
         {
             LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
@@ -447,7 +506,9 @@ namespace QuanLyQuanCafe
             add { deletecategory += value; }
             remove { deletecategory -= value; }
         }
-        
+
+
+
 
         #endregion
 

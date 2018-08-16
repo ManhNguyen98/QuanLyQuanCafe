@@ -32,13 +32,12 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.panel16 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbDisplayName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txbUserName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
             this.btnShowAccount = new System.Windows.Forms.Button();
@@ -112,6 +111,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.tcAdmin = new System.Windows.Forms.TabControl();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.tcAccount.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -188,19 +188,12 @@
             // 
             // panel16
             // 
-            this.panel16.Controls.Add(this.textBox3);
+            this.panel16.Controls.Add(this.cmbType);
             this.panel16.Controls.Add(this.label7);
             this.panel16.Location = new System.Drawing.Point(4, 127);
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(309, 56);
             this.panel16.TabIndex = 3;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(139, 20);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(162, 20);
-            this.textBox3.TabIndex = 1;
             // 
             // label7
             // 
@@ -214,19 +207,19 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.textBox1);
+            this.panel12.Controls.Add(this.txbDisplayName);
             this.panel12.Controls.Add(this.label5);
             this.panel12.Location = new System.Drawing.Point(4, 65);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(309, 56);
             this.panel12.TabIndex = 2;
             // 
-            // textBox1
+            // txbDisplayName
             // 
-            this.textBox1.Location = new System.Drawing.Point(139, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(162, 20);
-            this.textBox1.TabIndex = 1;
+            this.txbDisplayName.Location = new System.Drawing.Point(139, 20);
+            this.txbDisplayName.Name = "txbDisplayName";
+            this.txbDisplayName.Size = new System.Drawing.Size(162, 20);
+            this.txbDisplayName.TabIndex = 1;
             // 
             // label5
             // 
@@ -240,20 +233,21 @@
             // 
             // panel13
             // 
-            this.panel13.Controls.Add(this.textBox2);
+            this.panel13.Controls.Add(this.txbUserName);
             this.panel13.Controls.Add(this.label6);
             this.panel13.Location = new System.Drawing.Point(5, 3);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(307, 56);
             this.panel13.TabIndex = 1;
             // 
-            // textBox2
+            // txbUserName
             // 
-            this.textBox2.Location = new System.Drawing.Point(138, 20);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(163, 20);
-            this.textBox2.TabIndex = 1;
+            this.txbUserName.Location = new System.Drawing.Point(138, 20);
+            this.txbUserName.Name = "txbUserName";
+            this.txbUserName.ReadOnly = true;
+            this.txbUserName.Size = new System.Drawing.Size(163, 20);
+            this.txbUserName.TabIndex = 1;
+            this.txbUserName.TextChanged += new System.EventHandler(this.txbUserName_TextChanged);
             // 
             // label6
             // 
@@ -284,6 +278,7 @@
             this.btnShowAccount.TabIndex = 3;
             this.btnShowAccount.Text = "Xem";
             this.btnShowAccount.UseVisualStyleBackColor = true;
+            this.btnShowAccount.Click += new System.EventHandler(this.btnShowAccount_Click);
             // 
             // btnEditAccount
             // 
@@ -950,6 +945,14 @@
             this.tcAdmin.Size = new System.Drawing.Size(662, 463);
             this.tcAdmin.TabIndex = 0;
             // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(139, 19);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(162, 21);
+            this.cmbType.TabIndex = 1;
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1085,13 +1088,12 @@
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Button btnResetPassword;
         private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbDisplayName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txbUserName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Button btnShowAccount;
@@ -1100,5 +1102,6 @@
         private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.DataGridView dtgvAccount;
+        private System.Windows.Forms.ComboBox cmbType;
     }
 }

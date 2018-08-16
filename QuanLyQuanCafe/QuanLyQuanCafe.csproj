@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\AccoutTypeDAO.cs" />
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="DAO\TableDAO.cs" />
     <Compile Include="DAO\TableStatusDAO.cs" />
     <Compile Include="DTO\Account.cs" />
+    <Compile Include="DTO\AccountType.cs" />
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillInfo.cs" />
     <Compile Include="DTO\Category.cs" />
