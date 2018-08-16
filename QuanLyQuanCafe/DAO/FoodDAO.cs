@@ -83,7 +83,7 @@ namespace QuanLyQuanCafe.DAO
         {
             List<Food> list = new List<Food>();
 
-            string query = string.Format("SELECT * FROM Food where name  like N'%{0}%'", name);
+            string query = string.Format("SELECT * FROM Food f WHERE dbo.fChuyenCoDauThanhKhongDau(f.NAME) LIKE N'%'+dbo.fChuyenCoDauThanhKhongDau(N'{0}')+'%'", name);
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 

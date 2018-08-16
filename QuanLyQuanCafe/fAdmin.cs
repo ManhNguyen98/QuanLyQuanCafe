@@ -447,9 +447,7 @@ namespace QuanLyQuanCafe
             add { deletecategory += value; }
             remove { deletecategory -= value; }
         }
-
-
-
+        
 
         #endregion
 
