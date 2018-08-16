@@ -24,7 +24,7 @@ namespace QuanLyQuanCafe.DAO
         {
             List<Category> listCategory = new List<Category>();
 
-            string query = "SELECT* FROM FoodCategory fc";
+            string query = "SELECT * FROM FoodCategory fc";
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -52,6 +52,39 @@ namespace QuanLyQuanCafe.DAO
             }
 
             return category;
+        }
+
+        public bool InsertCategory(string name)
+        {
+            string query = string.Format("INSERT INTO FoodCategory ( NAME ) VALUES (	N'{0}' )", name);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool UpdateCategory(string name,int id)
+        {
+            string query = string.Format("UPDATE FoodCategory SET NAME = N'{0}' WHERE id = {1}", name , id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            DataTable data = DataProvider.Instance.ExecuteQuery("Select * from Food where idCategory = " + id);
+            foreach(DataRow item in data.Rows)
+            {
+                Food food = new Food(item);
+                BillInfoDAO.Instance.DeleteBillInfoByFoodId(food.ID);
+            }
+
+            string query = string.Format("Delete Food where idCategory = {0}", id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            query = string.Format("Delete FoodCategory where id = {0}", id);
+            result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
         }
     }
 }

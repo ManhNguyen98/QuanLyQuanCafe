@@ -46,6 +46,7 @@ namespace QuanLyQuanCafe
             List<Category> listCategory = CategoryDAO.Instance.GetListCateGory();
             cmbCategory.DataSource = listCategory;
             cmbCategory.DisplayMember = "Name";
+            
         }
 
         void LoadFoodListByCategoryID(int id)
@@ -138,7 +139,52 @@ namespace QuanLyQuanCafe
             f.InsertFood += F_InsertFood;
             f.DeleteFood += F_DeleteFood;
             f.UpdateFood += F_UpdateFood;
+            f.InsertTable += F_InsertTable;
+            f.DeleteTable += F_DeleteTable;
+            f.UpdateTable += F_UpdateTable;
+            f.Insertcategory += F_Insertcategory;
+            f.Updatecategory += F_Updatecategory;
+            f.Deletecategory += F_Deletecategory;
             f.ShowDialog();
+        }
+
+        private void F_Deletecategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+           
+        }
+
+        private void F_DeleteTable1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void F_Updatecategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+        }
+
+        private void F_Insertcategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+        }
+
+        private void F_UpdateTable(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
+        private void F_DeleteTable(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
+        private void F_InsertTable(object sender, EventArgs e)
+        {
+            LoadTable();
         }
 
         private void F_UpdateFood(object sender, EventArgs e)

@@ -99,7 +99,7 @@ namespace QuanLyQuanCafe
         {
             txbTable.DataBindings.Add(new Binding("text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
             txbTableID.DataBindings.Add(new Binding("text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
-            //cmbStatusTable.DataBindings.Add(new Binding("member", dtgvTable.DataSource, "Status"));
+           
         }
 
         void LoadStatuIntoCombobox(ComboBox cb)
@@ -125,6 +125,7 @@ namespace QuanLyQuanCafe
             LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
         }
 
+        //Thêm, sửa, xóa, tìm kiếm thức ăn
         private void btnShowFood_Click(object sender, EventArgs e)
         {
             LoadListFood();
@@ -140,7 +141,7 @@ namespace QuanLyQuanCafe
                     //lấy 1 ô trong datagridview
                     Category category = CategoryDAO.Instance.GetCategoryById(id);
 
-                    label14.Text = category.Name;
+                    
                     cmbFoodCategory.SelectedItem = category;
 
                     int index = -1;
@@ -248,6 +249,7 @@ namespace QuanLyQuanCafe
 
         }
 
+        //Thêm, sửa, xóa bàn ăn
         private void btnShowTable_Click(object sender, EventArgs e)
         {
             LoadTableFood();
@@ -262,7 +264,7 @@ namespace QuanLyQuanCafe
      
                     TableStatus status = TableStatusDAO.Instance.GetStatusById(id);
 
-                    label8.Text = status.Name;
+                    
                     cmbStatusTable.SelectedItem = status;
                     int index = -1;
                     int i = 0;
@@ -288,8 +290,169 @@ namespace QuanLyQuanCafe
         {
             LoadCategory();
         }
+
+        private void btnAddTable_Click(object sender, EventArgs e)
+        {
+            string name = txbTable.Text;
+            string status = (cmbStatusTable.SelectedItem as TableStatus).Name;
+            
+
+            if (TableDAO.Instance.InsertTable(name,status))
+            {
+                MessageBox.Show("Thêm thành công!");
+                LoadTableFood();
+                if (insertTable != null)
+                    insertTable(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi thêm!");
+            }
+        }
+
+        private void btnEditTable_Click(object sender, EventArgs e)
+        {
+            string name = txbTable.Text;
+            string status = (cmbStatusTable.SelectedItem as TableStatus).Name;
+            int id = Convert.ToInt32(txbTableID.Text);
+            if (TableDAO.Instance.UpdateTable(name,status,id))
+            {
+                MessageBox.Show("Sửa thành công!");
+                LoadTableFood();
+                if (updateTable != null)
+                    updateTable(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi sửa!");
+            }
+        }
+
+        private void btnDeleteTable_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txbTableID.Text);
+
+            //BillInfoDAO.Instance.DeleteBillInfoByFoodId(idFood);
+
+            if (TableDAO.Instance.DeleteTable(id))
+            {
+                MessageBox.Show("Xóa thành công!");
+                LoadTableFood();
+                if (deleteTable != null)
+                    deleteTable(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi xóa!");
+            }
+        }
+
+        private event EventHandler insertTable;
+        public event EventHandler InsertTable
+        {
+            add { insertTable += value; }
+            remove { insertTable -= value; }
+        }
+
+        private event EventHandler updateTable;
+        public event EventHandler UpdateTable
+        {
+            add { updateTable += value; }
+            remove { updateTable -= value; }
+        }
+
+        private event EventHandler deleteTable;
+        public event EventHandler DeleteTable
+        {
+            add { deleteTable += value; }
+            remove { deleteTable -= value; }
+        }
+
+        //Thêm, sửa, xóa danh mục
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            string name = txtCategoryName.Text;
+
+
+            if (CategoryDAO.Instance.InsertCategory(name))
+            {
+                MessageBox.Show("Thêm thành công!");
+                LoadCategory();
+                if (insertcategory != null)
+                    insertcategory(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi thêm!");
+            }
+
+            LoadCategoryIntoCombobox(cmbFoodCategory);
+        }
+
+        private void btnEditCategory_Click(object sender, EventArgs e)
+        {
+            string name = txtCategoryName.Text;
+            int id = Convert.ToInt32(txtCategoryId.Text);
+            if (CategoryDAO.Instance.UpdateCategory(name, id))
+            {
+                MessageBox.Show("Sửa thành công!");
+                LoadCategory();
+                if (updatecategory != null)
+                    updatecategory(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi sửa!");
+            }
+            LoadCategoryIntoCombobox(cmbFoodCategory);
+        }
+
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txtCategoryId.Text);
+
+            //BillInfoDAO.Instance.DeleteBillInfoByFoodId(idFood);
+
+            if (CategoryDAO.Instance.DeleteCategory(id))
+            {
+                MessageBox.Show("Xóa thành công!");
+                LoadCategory();
+                if (deletecategory != null)
+                    deletecategory(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra khi xóa!");
+            }
+            LoadCategoryIntoCombobox(cmbFoodCategory);
+        }
+
+        private event EventHandler insertcategory;
+        public event EventHandler Insertcategory
+        {
+            add { insertcategory += value; }
+            remove { insertcategory -= value; }
+        }
+
+        private event EventHandler updatecategory;
+        public event EventHandler Updatecategory
+        {
+            add { updatecategory += value; }
+            remove { updatecategory -= value; }
+        }
+
+        private event EventHandler deletecategory;
+        public event EventHandler Deletecategory
+        {
+            add { deletecategory += value; }
+            remove { deletecategory -= value; }
+        }
+
+
+
+
         #endregion
 
-
+        
     }
 }
