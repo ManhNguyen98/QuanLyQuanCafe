@@ -32,6 +32,7 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.panel16 = new System.Windows.Forms.Panel();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.txbDisplayName = new System.Windows.Forms.TextBox();
@@ -111,7 +112,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.tcAdmin = new System.Windows.Forms.TabControl();
-            this.cmbType = new System.Windows.Forms.ComboBox();
             this.tcAccount.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -185,6 +185,7 @@
             this.btnResetPassword.TabIndex = 4;
             this.btnResetPassword.Text = "Đặt lại mật khẩu";
             this.btnResetPassword.UseVisualStyleBackColor = true;
+            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // panel16
             // 
@@ -194,6 +195,14 @@
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(309, 56);
             this.panel16.TabIndex = 3;
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(139, 19);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(162, 21);
+            this.cmbType.TabIndex = 1;
             // 
             // label7
             // 
@@ -244,7 +253,6 @@
             // 
             this.txbUserName.Location = new System.Drawing.Point(138, 20);
             this.txbUserName.Name = "txbUserName";
-            this.txbUserName.ReadOnly = true;
             this.txbUserName.Size = new System.Drawing.Size(163, 20);
             this.txbUserName.TabIndex = 1;
             this.txbUserName.TextChanged += new System.EventHandler(this.txbUserName_TextChanged);
@@ -288,6 +296,7 @@
             this.btnEditAccount.TabIndex = 2;
             this.btnEditAccount.Text = "Sửa";
             this.btnEditAccount.UseVisualStyleBackColor = true;
+            this.btnEditAccount.Click += new System.EventHandler(this.btnEditAccount_Click);
             // 
             // btnDeleteAccount
             // 
@@ -297,6 +306,7 @@
             this.btnDeleteAccount.TabIndex = 1;
             this.btnDeleteAccount.Text = "Xóa";
             this.btnDeleteAccount.UseVisualStyleBackColor = true;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
             // 
             // btnAddAccount
             // 
@@ -306,6 +316,7 @@
             this.btnAddAccount.TabIndex = 0;
             this.btnAddAccount.Text = "Thêm";
             this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
             // panel15
             // 
@@ -317,6 +328,7 @@
             // 
             // dtgvAccount
             // 
+            this.dtgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvAccount.Location = new System.Drawing.Point(2, 3);
             this.dtgvAccount.Name = "dtgvAccount";
@@ -944,14 +956,6 @@
             this.tcAdmin.SelectedIndex = 0;
             this.tcAdmin.Size = new System.Drawing.Size(662, 463);
             this.tcAdmin.TabIndex = 0;
-            // 
-            // cmbType
-            // 
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(139, 19);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(162, 21);
-            this.cmbType.TabIndex = 1;
             // 
             // fAdmin
             // 

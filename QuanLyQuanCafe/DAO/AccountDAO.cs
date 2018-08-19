@@ -52,7 +52,45 @@ namespace QuanLyQuanCafe.DAO
 
         public DataTable GetListAccount()
         {
-            return DataProvider.Instance.ExecuteQuery("Select UserName , DisplayName , Type from Account ");
+            return DataProvider.Instance.ExecuteQuery("Select UserName , DisplayName  from Account ");
+        }
+
+        public bool InsertAccount(string name, string displayname, string type)
+        {
+            int id;
+            if (Equals(type,"Admin")) id = 1;
+            else id = 0;
+            string query = string.Format("INSERT INTO Account (UserName , DisplayName ,	Type ) VALUES (	N'{0}' , N'{1}' , {2})", name, displayname, id);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool UpdateAccount(string name, string displayname, string type)
+        {
+            int id;
+            if (Equals(type, "Admin")) id = 1;
+            else id = 0;
+            string query = string.Format("UPDATE Account SET DisplayName = N'{0}',	Type = {1} WHERE UserName like N'{2}'",  displayname, id,name);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteAccount(String UserName)
+        {
+            string query = string.Format("Delete Account where UserName = N'{0}'", UserName);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool ResetPassword(string UserName)
+        {
+            string query = string.Format("Update Account Set PassWord = N'0' where UserName = N'{0}'", UserName);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
         }
     }
 }
