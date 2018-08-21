@@ -110,6 +110,11 @@ namespace QuanLyQuanCafe
         }
         #endregion
         #region Events
+        private void thêmMónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddFood_Click(this, new EventArgs());
+        }
+
         private void btn_Click(object sender, EventArgs e)
         {
             int tableId = ((sender as Button).Tag as Table).ID;//lay Table ID
@@ -288,8 +293,9 @@ namespace QuanLyQuanCafe
                 LoadTable();
             }
         }
+
         #endregion
 
-
+        
     }
 }
