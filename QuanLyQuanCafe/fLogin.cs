@@ -22,6 +22,7 @@ namespace QuanLyQuanCafe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            
             string userName = txbUserName.Text;
             string passWord = txbPassWord.Text;
             if (Login(userName,passWord))
