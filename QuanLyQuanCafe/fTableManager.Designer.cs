@@ -54,6 +54,7 @@
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
             this.chứcNăngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thêmMónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -149,6 +150,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.comboBox1);
             this.panel3.Controls.Add(this.txbTotalPrice);
             this.panel3.Controls.Add(this.cmbSwitchTable);
             this.panel3.Controls.Add(this.btnSwitchTable);
@@ -164,7 +166,7 @@
             // 
             this.txbTotalPrice.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbTotalPrice.ForeColor = System.Drawing.Color.Red;
-            this.txbTotalPrice.Location = new System.Drawing.Point(183, 22);
+            this.txbTotalPrice.Location = new System.Drawing.Point(183, 4);
             this.txbTotalPrice.Name = "txbTotalPrice";
             this.txbTotalPrice.ReadOnly = true;
             this.txbTotalPrice.Size = new System.Drawing.Size(108, 25);
@@ -192,9 +194,9 @@
             // 
             // nmDiscount
             // 
-            this.nmDiscount.Location = new System.Drawing.Point(93, 39);
+            this.nmDiscount.Location = new System.Drawing.Point(183, 35);
             this.nmDiscount.Name = "nmDiscount";
-            this.nmDiscount.Size = new System.Drawing.Size(75, 20);
+            this.nmDiscount.Size = new System.Drawing.Size(108, 20);
             this.nmDiscount.TabIndex = 5;
             this.nmDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -204,7 +206,7 @@
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(75, 28);
             this.btnDiscount.TabIndex = 4;
-            this.btnDiscount.Text = "Giảm giá";
+            this.btnDiscount.Text = "Gộp bàn";
             this.btnDiscount.UseVisualStyleBackColor = true;
             // 
             // btnCheckout
@@ -296,6 +298,14 @@
             this.thêmMónToolStripMenuItem.Text = "Thêm món";
             this.thêmMónToolStripMenuItem.Click += new System.EventHandler(this.thêmMónToolStripMenuItem_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(93, 38);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(75, 21);
+            this.comboBox1.TabIndex = 9;
+            // 
             // fTableManager
             // 
             this.AcceptButton = this.btnCheckout;
@@ -353,5 +363,6 @@
         private System.Windows.Forms.TextBox txbTotalPrice;
         private System.Windows.Forms.ToolStripMenuItem chứcNăngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thêmMónToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

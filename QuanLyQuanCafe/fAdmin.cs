@@ -608,8 +608,61 @@ namespace QuanLyQuanCafe
 
 
 
+
         #endregion
 
-        
+        private void btnFirstBillPage_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            dtgvBill.DataSource = BillDAO.Instance1.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value, 1);
+        }
+
+        private void btnLastBillPage_Click(object sender, EventArgs e)
+        {
+            int sumRecord = BillDAO.Instance1.GetNumBillListByDate(dtpkfromDate.Value, dtpktoDate.Value);
+            int Lastpage = sumRecord / 10;
+
+            if (sumRecord % 10 != 0) Lastpage ++;
+
+            txbNumPage.Text = Lastpage.ToString();
+
+            dtgvBill.DataSource = BillDAO.Instance1.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value, Lastpage);
+        }
+
+        private void txbNumPage_TextChanged(object sender, EventArgs e)
+        {
+            dtgvBill.DataSource = BillDAO.Instance1.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value,Convert.ToInt32(txbNumPage.Text));
+        }
+
+        private void btnPreviewoursBillPage_Click(object sender, EventArgs e)
+        {
+            
+            int pageNum = Convert.ToInt32(txbNumPage.Text);
+            if (pageNum == 1) ;
+            else
+            {
+                pageNum--;
+                dtgvBill.DataSource = BillDAO.Instance1.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value, pageNum );
+                txbNumPage.Text = pageNum.ToString();
+            }
+        }
+
+        private void btnNextBillPage_Click(object sender, EventArgs e)
+        {
+            int sumRecord = BillDAO.Instance1.GetNumBillListByDate(dtpkfromDate.Value, dtpktoDate.Value);
+            int Lastpage = sumRecord / 10;
+
+            if (sumRecord % 10 != 0) Lastpage++;
+
+            int pageNum = Convert.ToInt32(txbNumPage.Text);
+
+            if (pageNum == Lastpage) ;
+            else
+            {
+                pageNum++;
+                dtgvBill.DataSource = BillDAO.Instance1.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value, pageNum);
+                txbNumPage.Text = pageNum.ToString();
+            }
+        }
     }
 }
